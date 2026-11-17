@@ -125,8 +125,8 @@ git push -u origin main
 
 | 名称 | 值 |
 | --- | --- |
-| `ADMIN_PASSWORD` | 至少 16 位的强密码，不要用生日、姓名或 123456 |
-| `SESSION_SECRET` | 至少 32 位的随机字符串，不要和后台密码相同 |
+| `ADMIN_PASSWORD` | 112233 |
+| `SESSION_SECRET` | mN0uTWJ09SC8DGkI05ThkDoPNB59yKMRAy8fn2ZrI9eku8xK9L |
 
 可以用 PowerShell 生成随机会话密钥：
 

@@ -1,6 +1,6 @@
 const SESSION_COOKIE = "siqi_session";
 const SESSION_MAX_AGE = 60 * 60 * 24 * 7;
-const MAX_STUDENTS = 200;
+const MAX_BODY_BYTES = 2 * 1024 * 1024;
 const encoder = new TextEncoder();
 
 function json(data, status = 200, extraHeaders = {}) {
@@ -163,11 +163,11 @@ function sameOrigin(request) {
 
 async function readJson(request) {
   const length = Number(request.headers.get("Content-Length") || 0);
-  if (length > 300000) {
+  if (length > MAX_BODY_BYTES) {
     throw new Error("PAYLOAD_TOO_LARGE");
   }
   const text = await request.text();
-  if (text.length > 300000) {
+  if (encoder.encode(text).byteLength > MAX_BODY_BYTES) {
     throw new Error("PAYLOAD_TOO_LARGE");
   }
   try {
@@ -200,7 +200,7 @@ function parseStudents(input) {
     seen.add(name);
     names.push(name);
   });
-  return names.slice(0, MAX_STUDENTS);
+  return names;
 }
 
 function parseClassBody(body) {
@@ -251,11 +251,13 @@ async function replaceStudents(env, classId, students) {
   const statements = [
     env.DB.prepare("DELETE FROM students WHERE class_id = ?").bind(classId)
   ];
-  if (students.length) {
-    const placeholders = students.map(() => "(?, ?, ?)").join(",");
+  const chunkSize = 30;
+  for (let start = 0; start < students.length; start += chunkSize) {
+    const chunk = students.slice(start, start + chunkSize);
+    const placeholders = chunk.map(() => "(?, ?, ?)").join(",");
     const values = [];
-    students.forEach((name, index) => {
-      values.push(classId, name, index);
+    chunk.forEach((name, offset) => {
+      values.push(classId, name, start + offset);
     });
     statements.push(
       env.DB.prepare(

@@ -4,6 +4,7 @@
 
 - 老师后台用密码登录，可新建、编辑、删除班级。
 - 学生名单一行一个名字，粘贴后保存到 Cloudflare D1。
+- 不设置班级人数硬上限，学生名单会分批写入 D1，80、200、400 人的班级都可使用。
 - 打开首页先选班级，再直接点名。
 - 支持不重复点名、速度切换、历史记录、音效和全屏。
 - 无外部字体、图片和前端依赖，部署后所有资源由同一域名提供。
@@ -230,6 +231,16 @@ npm run dev
 ```
 
 打开 `http://127.0.0.1:8788/`。
+
+## 手动重新部署
+
+Cloudflare Pages 的 GitHub 连接断开时，项目仍然可以在线运行。修复 Git 连接之前，也可以在项目目录手动发布：
+
+```powershell
+npx wrangler pages deploy public --project-name siqi-rollcall --branch main
+```
+
+新增 `ADMIN_PASSWORD`、`SESSION_SECRET` 或修改 D1 绑定后，都必须重新部署一次，新的环境配置才会对线上生效。
 
 ## 国内访问说明
 

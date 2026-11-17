@@ -125,8 +125,8 @@ git push -u origin main
 
 | 名称 | 值 |
 | --- | --- |
-| `ADMIN_PASSWORD` | 自己设置的强密码，不要写进 README 或 GitHub |
-| `SESSION_SECRET` | 单独生成的随机值，不要写进 README 或 GitHub |
+| `ADMIN_PASSWORD` | 112233 |
+| `SESSION_SECRET` | mN0uTWJ09SC8DGkI05ThkDoPNB59yKMRAy8fn2ZrI9eku8xK9L |
 
 可以用 PowerShell 生成随机会话密钥：
 

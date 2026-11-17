@@ -31,7 +31,7 @@
   min-height: clamp(220px, 28svh, 300px);
   padding: clamp(24px, 4vw, 48px);
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: 28px;
   overflow: hidden;
   background: linear-gradient(180deg, #cff5fb 0%, #bdebf5 100%);
@@ -67,7 +67,8 @@
 .gate-copy {
   position: relative;
   z-index: 2;
-  max-width: 650px;
+  max-width: 760px;
+  text-align: center;
 }
 
 .gate-copy h2 {
@@ -81,8 +82,7 @@
 }
 
 .gate-copy p {
-  max-width: 43ch;
-  margin: 14px 0 0;
+  margin: 10px 0 0;
   color: var(--ink-soft);
   font-size: clamp(13px, 1.2vw, 16px);
   font-weight: 600;
@@ -90,12 +90,13 @@
 }
 
 .gate-mascot {
-  position: relative;
+  position: absolute;
+  top: 50%;
+  right: clamp(20px, 4vw, 60px);
   z-index: 1;
-  flex: 0 0 auto;
   width: clamp(110px, 15vw, 190px);
-  transform: rotate(4deg);
-  animation: mascot-float 4.2s ease-in-out infinite;
+  transform: translateY(-50%) rotate(4deg);
+  animation: gate-mascot-float 4.2s ease-in-out infinite;
 }
 
 .gate-mascot svg {
@@ -1199,6 +1200,16 @@
   }
 }
 
+@keyframes gate-mascot-float {
+  0%,
+  100% {
+    transform: translateY(-50%) rotate(-1deg);
+  }
+  50% {
+    transform: translateY(calc(-50% - 8px)) rotate(4deg);
+  }
+}
+
 @keyframes mascot-rock {
   from {
     transform: translateY(-2px) rotate(-12deg);
@@ -1427,14 +1438,11 @@
   }
 
   .gate-copy p {
-    max-width: 22ch;
     font-size: 12px;
   }
 
   .gate-mascot {
-    width: 92px;
-    margin-right: -6px;
-    align-self: flex-end;
+    display: none;
   }
 
   .gate-tools {

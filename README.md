@@ -125,8 +125,8 @@ git push -u origin main
 
 | 名称 | 值 |
 | --- | --- |
-| `ADMIN_PASSWORD` | 112233 |
-| `SESSION_SECRET` | mN0uTWJ09SC8DGkI05ThkDoPNB59yKMRAy8fn2ZrI9eku8xK9L |
+| `ADMIN_PASSWORD` | 自己设置的强密码，不要写进 README 或 GitHub |
+| `SESSION_SECRET` | 单独生成的随机值，不要写进 README 或 GitHub |
 
 可以用 PowerShell 生成随机会话密钥：
 
@@ -207,6 +207,53 @@ https://siqi.lovie.me/
 ```
 
 就能看到班级卡片并开始点名。
+
+## 名单保存在哪里
+
+学生名单保存在 **Cloudflare D1 数据库** 中，不在浏览器，也不在 HTML 或 GitHub 仓库里。
+
+| 项目 | 值 |
+| --- | --- |
+| 数据库名称 | `siqi-rollcall` |
+| 数据库 ID | `72462e7d-3e38-41b2-8064-8ac39f3b513e` |
+| 数据区域 | 亚太 `APAC / KIX`（日本大阪） |
+| 班级表 | `classes`，保存班级名称、说明和排序 |
+| 学生表 | `students`，保存学生姓名和对应班级 |
+
+### 在线查看
+
+1. 打开 Cloudflare 控制台。
+2. 左侧进入 **D1 SQL 数据库**。
+3. 点击 `siqi-rollcall`。
+4. 打开 **Console / 控制台**。
+5. 执行：
+
+```sql
+SELECT c.name AS 班级, s.name AS 学生
+FROM students s
+JOIN classes c ON c.id = s.class_id
+ORDER BY c.sort_order, s.sort_order;
+```
+
+### 备份名单
+
+在本地 PowerShell 执行：
+
+```powershell
+cd F:\codex\output\siqi-rollcall
+npx wrangler d1 export siqi-rollcall --remote --output F:\codex\output\siqi-rollcall-backup.sql
+```
+
+这会生成一个包含所有班级和姓名的 SQL 备份文件。备份文件包含学生真实姓名，请妥善保管。
+
+截至 2026-11-17 检查时，线上数据库中有：
+
+- 六年级：33 人
+- 七年级：45 人
+
+人数会随着后台重新保存名单而变化，以 D1 数据库中的实际数据为准。如果这两个班还没有保存完整名单，进入后台重新粘贴并保存即可。
+
+浏览器只保存音量、速度、是否不重复、上次选择班级等设置，不保存学生名单。删除或重新创建 Pages 项目不会删除名单；但如果删除 D1 数据库，名单会一起丢失，所以删库前一定要先导出备份。
 
 ## 本地开发
 

@@ -344,7 +344,7 @@
         status = "本轮全班都点过啦，点“重置”再来一轮";
         stageLabel = "本轮完成";
       } else {
-        status = `请 ${state.currentName} 同学来回答吧～`;
+        status = `${state.currentName} 准备好了没～`;
         stageLabel = "已锁定";
       }
     } else if (isEmpty) {

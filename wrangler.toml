@@ -1,0 +1,8 @@
+name = "siqi-rollcall"
+compatibility_date = "2026-11-17"
+pages_build_output_dir = "public"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "siqi-rollcall"
+database_id = "72462e7d-3e38-41b2-8064-8ac39f3b513e"

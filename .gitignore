@@ -1,0 +1,7 @@
+node_modules/
+.wrangler/
+.dev.vars
+.playwright-cli/
+/*.png
+*.log
+.DS_Store

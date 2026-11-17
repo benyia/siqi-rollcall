@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+  <meta name="theme-color" content="#fff7e8">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="选择一个班级，马上开始课堂随机点名。">
+  <meta name="robots" content="noindex, nofollow">
+  <title>星星点名机</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/base.css">
+  <link rel="stylesheet" href="/assets/app.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">跳到主要内容</a>
+
+  <div class="app">
+    <main id="main-content" tabindex="-1">
+      <header class="topbar">
+        <div class="brand">
+          <span class="brand-sticker" aria-hidden="true">
+            <svg viewBox="0 0 64 64" fill="none">
+              <path d="M32 7 40 23 58 26 45 38 48 56 32 48 16 56 19 38 6 26 24 23Z" fill="#FFD74A" stroke="#23314F" stroke-width="4.5" stroke-linejoin="round"/>
+              <circle cx="25" cy="31" r="2.6" fill="#23314F"/>
+              <circle cx="39" cy="31" r="2.6" fill="#23314F"/>
+              <path d="M25.5 40c4.2 3.2 8.8 3.2 13 0" stroke="#23314F" stroke-width="3.5" stroke-linecap="round"/>
+              <circle cx="20" cy="38" r="3.5" fill="#FF7D8D" opacity=".7"/>
+              <circle cx="44" cy="38" r="3.5" fill="#FF7D8D" opacity=".7"/>
+            </svg>
+          </span>
+          <div class="brand-copy">
+            <h1>星星点名机</h1>
+            <p>选好班级，今天的幸运星会是谁呢？</p>
+          </div>
+        </div>
+
+        <div class="top-actions">
+          <button class="switch-class-button" id="switchClassBtn" type="button" hidden>
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M5 8h11.5M12 3.5 16.5 8 12 12.5M19 16H7.5M12 11.5 7.5 16l4.5 4.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>切换班级</span>
+          </button>
+          <button class="icon-button" id="soundBtn" type="button" aria-pressed="true" aria-label="关闭音效" title="关闭音效">
+            <svg class="sound-on-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M4 9.5v5h3.4l4.4 3.6V5.9L7.4 9.5H4Z" fill="currentColor" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+              <path d="M15 9.2c1.55 1.55 1.55 4.05 0 5.6M17.9 6.3c3.2 3.2 3.2 8.2 0 11.4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <svg class="sound-off-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M4 9.5v5h3.4l4.4 3.6V5.9L7.4 9.5H4Z" fill="currentColor" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+              <path d="m15.2 9.2 5.2 5.6M20.4 9.2l-5.2 5.6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <button class="icon-button" id="fullscreenBtn" type="button" aria-label="进入全屏" title="进入全屏">
+            <svg class="fullscreen-enter-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M9 4H4v5M15 4h5v5M20 15v5h-5M4 15v5h5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <svg class="fullscreen-exit-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M4 9h5V4M20 9h-5V4M15 20v-5h5M4 15h5v5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <section class="class-gate" id="classGate" aria-labelledby="classGateTitle">
+        <div class="gate-hero">
+          <div class="gate-copy">
+            <h2 id="classGateTitle">先选一个班级</h2>
+            <p>选好后马上进入点名。班级和学生名单由老师后台统一管理，换一台电脑打开也不需要重新整理名单。</p>
+          </div>
+          <div class="gate-mascot" aria-hidden="true">
+            <svg viewBox="0 0 180 180" fill="none">
+              <path d="M90 18 109 60 155 65 121 96 130 142 90 119 50 142 59 96 25 65 71 60Z" fill="#FFD74A" stroke="#23314F" stroke-width="7" stroke-linejoin="round"/>
+              <path d="M51 28 90 11 129 28 90 47Z" fill="#3B79DA" stroke="#23314F" stroke-width="6" stroke-linejoin="round"/>
+              <path d="M64 38v15c14 9 38 9 52 0V38" fill="#5C93EA" stroke="#23314F" stroke-width="5" stroke-linejoin="round"/>
+              <path d="M129 28v25" stroke="#23314F" stroke-width="5" stroke-linecap="round"/>
+              <circle cx="129" cy="57" r="4.5" fill="#FFD74A" stroke="#23314F" stroke-width="3"/>
+              <circle cx="71" cy="83" r="5.2" fill="#23314F"/>
+              <circle cx="109" cy="83" r="5.2" fill="#23314F"/>
+              <path d="M72 101c10 9 26 9 36 0" stroke="#23314F" stroke-width="6" stroke-linecap="round"/>
+              <circle cx="57" cy="97" r="8" fill="#FF7D8D" opacity=".62"/>
+              <circle cx="123" cy="97" r="8" fill="#FF7D8D" opacity=".62"/>
+              <path d="m28 96 3 7 8 1-6 5 2 8-7-4-7 4 2-8-6-5 8-1 3-7Z" fill="#FF7D8D" stroke="#23314F" stroke-width="3" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="gate-tools">
+          <label class="search-box">
+            <span class="sr-only">搜索班级</span>
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2.4"/>
+              <path d="m15.4 15.4 4.1 4.1" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+            </svg>
+            <input id="classSearch" type="search" inputmode="search" placeholder="搜索班级名称" autocomplete="off">
+          </label>
+          <span class="class-count" id="classCount">正在读取班级…</span>
+        </div>
+
+        <div class="class-grid" id="classGrid" aria-live="polite" aria-busy="true"></div>
+
+        <div class="gate-state" id="gateState">
+          <div class="gate-state-copy">
+            <h3 id="gateStateTitle">正在读取班级…</h3>
+            <p id="gateStateText">马上就好。</p>
+            <div class="gate-actions" id="gateActions" hidden>
+              <a class="primary-button" href="/admin/">去老师后台</a>
+              <button class="outline-button" id="retryClassesBtn" type="button">重新加载</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="gate-admin-link">
+          <a href="/admin/">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 3 4.5 6.5v5.7c0 4.4 3.1 7.3 7.5 8.8 4.4-1.5 7.5-4.4 7.5-8.8V6.5L12 3Z" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/>
+              <path d="M9 12.2 11.1 14.3 15.5 9.8" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            老师后台
+          </a>
+        </div>
+      </section>
+
+      <div class="workspace" id="workspace" hidden>
+        <section class="stage" id="stage" data-state="idle" aria-labelledby="stageHeading">
+          <h2 class="sr-only" id="stageHeading">随机点名舞台</h2>
+
+          <div class="stage-head">
+            <div class="stage-status" aria-hidden="true">
+              <span class="status-dot"></span>
+              <span id="stageStateText">准备就绪</span>
+            </div>
+            <div class="round-readout" id="roundReadout">本轮已点 0 位</div>
+          </div>
+
+          <div class="stage-scene">
+            <span class="stage-star stage-star-a" aria-hidden="true"></span>
+            <span class="stage-star stage-star-b" aria-hidden="true"></span>
+            <span class="stage-star stage-star-c" aria-hidden="true"></span>
+
+            <div class="mascot" aria-hidden="true">
+              <svg viewBox="0 0 180 180" fill="none">
+                <path d="M90 18 109 60 155 65 121 96 130 142 90 119 50 142 59 96 25 65 71 60Z" fill="#FFD74A" stroke="#23314F" stroke-width="7" stroke-linejoin="round"/>
+                <path d="M51 28 90 11 129 28 90 47Z" fill="#3B79DA" stroke="#23314F" stroke-width="6" stroke-linejoin="round"/>
+                <path d="M64 38v15c14 9 38 9 52 0V38" fill="#5C93EA" stroke="#23314F" stroke-width="5" stroke-linejoin="round"/>
+                <path d="M129 28v25" stroke="#23314F" stroke-width="5" stroke-linecap="round"/>
+                <circle cx="129" cy="57" r="4.5" fill="#FFD74A" stroke="#23314F" stroke-width="3"/>
+                <circle cx="71" cy="83" r="5.2" fill="#23314F"/>
+                <circle cx="109" cy="83" r="5.2" fill="#23314F"/>
+                <path d="M72 101c10 9 26 9 36 0" stroke="#23314F" stroke-width="6" stroke-linecap="round"/>
+                <circle cx="57" cy="97" r="8" fill="#FF7D8D" opacity=".62"/>
+                <circle cx="123" cy="97" r="8" fill="#FF7D8D" opacity=".62"/>
+                <path d="m28 96 3 7 8 1-6 5 2 8-7-4-7 4 2-8-6-5 8-1 3-7Z" fill="#FF7D8D" stroke="#23314F" stroke-width="3" stroke-linejoin="round"/>
+              </svg>
+            </div>
+
+            <div class="name-ticket">
+              <span class="ticket-spark ticket-spark-a" aria-hidden="true"></span>
+              <span class="ticket-spark ticket-spark-b" aria-hidden="true"></span>
+              <div class="ticket-tag">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="m12 2.8 2.5 5.6 6.1.7-4.6 4.2 1.2 6-5.2-3-5.2 3 1.2-6L3.4 9.1l6.1-.7L12 2.8Z" fill="#23314F"/>
+                </svg>
+                <span>本轮幸运星</span>
+              </div>
+              <p class="name-display is-prompt" id="nameDisplay" aria-hidden="true">准备好了吗？</p>
+              <p class="status-text" id="statusText">名单已就绪，点击“开始点名”</p>
+            </div>
+          </div>
+
+          <div class="controls">
+            <button class="btn btn-start" id="startBtn" type="button" aria-keyshortcuts="Space" aria-describedby="shortcutHint">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M8 5.2v13.6c0 .8.9 1.3 1.6.9l10-6.8c.6-.4.6-1.3 0-1.7l-10-6.8c-.7-.5-1.6 0-1.6.8Z" fill="currentColor"/>
+              </svg>
+              <span id="startLabel">开始点名</span>
+            </button>
+            <button class="btn btn-stop" id="stopBtn" type="button" disabled aria-keyshortcuts="Space" aria-describedby="shortcutHint">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="6" y="6" width="12" height="12" rx="2.5" fill="currentColor"/>
+              </svg>
+              <span>停止</span>
+            </button>
+            <button class="btn btn-reset" id="resetBtn" type="button" aria-keyshortcuts="R">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M5 9.5a8 8 0 1 1-.1 5" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/>
+                <path d="M4 4.5v5.4h5.4" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>重置</span>
+            </button>
+          </div>
+
+          <p class="shortcut-hint" id="shortcutHint">
+            <kbd>空格</kbd> 开始 / 停止
+            <span aria-hidden="true"> · </span>
+            <kbd>R</kbd> 重置
+          </p>
+          <p class="sr-only" id="resultAnnouncer" aria-live="polite"></p>
+        </section>
+
+        <section class="side-panel" aria-labelledby="listHeading">
+          <div class="panel-heading">
+            <div>
+              <h2 id="listHeading">班级名单</h2>
+              <p id="classSubtitle">名单由老师后台统一同步</p>
+            </div>
+            <span class="count-pill" id="nameCount">0 人</span>
+          </div>
+
+          <div class="class-summary">
+            <div class="class-summary-name">
+              <span class="class-summary-badge" aria-hidden="true">班</span>
+              <span id="currentClassName">未选择班级</span>
+            </div>
+            <p class="class-summary-description" id="currentClassDescription"></p>
+            <div class="class-summary-actions">
+              <button id="refreshClassBtn" type="button">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M5 9.5a8 8 0 1 1-.1 5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                  <path d="M4 4.5v5.4h5.4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                刷新名单
+              </button>
+              <a href="/admin/" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M4 20h16M6 20V9l6-4 6 4v11M9.5 20v-5h5v5" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                管理名单
+              </a>
+            </div>
+          </div>
+
+          <div class="student-roster" id="studentRoster" aria-label="当前班级学生名单"></div>
+
+          <div class="panel-divider" aria-hidden="true"></div>
+
+          <fieldset class="speed-fieldset">
+            <legend>滚动速度</legend>
+            <div class="speed-options">
+              <label class="speed-option" data-speed="slow">
+                <input type="radio" name="speed" value="slow">
+                <span class="speed-pill">
+                  <span class="speed-meter" aria-hidden="true"><i></i><i></i><i></i></span>
+                  <span>慢速</span>
+                </span>
+              </label>
+              <label class="speed-option" data-speed="normal">
+                <input type="radio" name="speed" value="normal">
+                <span class="speed-pill">
+                  <span class="speed-meter" aria-hidden="true"><i></i><i></i><i></i></span>
+                  <span>标准</span>
+                </span>
+              </label>
+              <label class="speed-option" data-speed="fast">
+                <input type="radio" name="speed" value="fast">
+                <span class="speed-pill">
+                  <span class="speed-meter" aria-hidden="true"><i></i><i></i><i></i></span>
+                  <span>快速</span>
+                </span>
+              </label>
+            </div>
+          </fieldset>
+
+          <div class="option-row">
+            <label class="switch-row">
+              <span class="switch-copy">
+                <strong>不重复点名</strong>
+                <small>点过的同学本轮不再出现</small>
+              </span>
+              <span class="switch">
+                <input id="noRepeat" type="checkbox">
+                <span class="switch-track" aria-hidden="true"><span></span></span>
+              </span>
+            </label>
+          </div>
+
+          <div class="history-block">
+            <div class="history-head">
+              <h3>本轮已点</h3>
+              <span id="historyTotal">0 位</span>
+            </div>
+            <p class="history-empty" id="historyEmpty">还没有点过名</p>
+            <ol class="history-list" id="historyList" aria-label="本轮已点到的同学" hidden></ol>
+          </div>
+        </section>
+      </div>
+
+      <footer class="page-footer">
+        <p>班级名单来自共享后台 · 换电脑打开同一网址即可继续使用</p>
+      </footer>
+    </main>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="confetti-layer" id="confettiLayer" aria-hidden="true"></div>
+
+  <script src="/assets/app.js" defer></script>
+</body>
+</html>

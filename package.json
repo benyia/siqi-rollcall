@@ -1,0 +1,14 @@
+{
+  "name": "siqi-rollcall",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler pages dev public --persist-to=.wrangler/state",
+    "db:migrate:local": "wrangler d1 migrations apply siqi-rollcall --local",
+    "db:migrate": "wrangler d1 migrations apply siqi-rollcall --remote"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  }
+}
